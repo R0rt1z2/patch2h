@@ -44,7 +44,7 @@ def write_headers(rom_name):
     in_file.seek(0)
 
 
-def write_data(in_file, out_file, rom_name):
+def write_data(in_file, out_file, rom_name, debug=False):
     i = 0
     
     in_file.seek(0)
@@ -64,7 +64,10 @@ def write_data(in_file, out_file, rom_name):
         
         if not data:
             break # EOF
-        
+
+        if debug:
+            print("[?] pos = {}, data = {}".format(in_file.tell(), hex_data))
+
         if i >= 16:
             out_file.write("\n")
             i = 0
@@ -79,6 +82,7 @@ def main():
         input_file = sys.argv[1]
         output_file = sys.argv[2]
         rom_name = sys.argv[2]
+        debug = True if len(sys.argv) > 3 and sys.argv[3] == "debug" else False
     else:
         print("[-] Missing arguments")
         sys.exit(1)
@@ -97,9 +101,9 @@ def main():
         out_fp = open(output_file, "w")
     except Exception as e:
         print("[-] Couldn't open '{}' :(".format(output_file))
-    
+
     print("[*] Dumping data from {} to '{}'...".format(input_file, output_file))
-    write_data(in_fp, out_fp, rom_name)
+    write_data(in_fp, out_fp, rom_name, debug)
     
     print("[+] All done, check '{}'!".format(output_file))
 
