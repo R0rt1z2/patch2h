@@ -29,7 +29,7 @@ import io
 def str_read(file, a):
     return str(file.read(a).decode("utf-8").strip())
 
-def write_headers(in_file, out_file, rom_name):
+def write_headers(rom_name):
     out_file.seek(0)
     out_file.write('''/* \n* AUTO GENERATED CODE, DO NOT MODIFY IT \n*/''')
 
@@ -42,13 +42,16 @@ def write_headers(in_file, out_file, rom_name):
     out_file.write('#define MODEL "{}"\n\n'.format(str_read(in_file, offset)))
     
     in_file.seek(0)
-    out_file.write("unsigned char {}[]".format(rom_name))
 
-def write_data(in_file, out_file):
+
+def write_data(in_file, out_file, rom_name):
     i = 0
-    out_file.seek(0, io.SEEK_END)
-    in_file.seek(0)
     
+    in_file.seek(0)
+    out_file.seek(0)
+
+    out_file.write('''/* \n* AUTO GENERATED CODE, DO NOT MODIFY IT \n*/\n\n''')
+    out_file.write("unsigned char {}[]".format(rom_name))
     out_file.write(" = {\n")
     
     while True:
@@ -94,12 +97,9 @@ def main():
         out_fp = open(output_file, "w")
     except Exception as e:
         print("[-] Couldn't open '{}' :(".format(output_file))
-
-    print("[*] Writing headers...")
-    write_headers(in_fp, out_fp, rom_name)
     
     print("[*] Dumping data from {} to '{}'...".format(input_file, output_file))
-    write_data(in_fp, out_fp)
+    write_data(in_fp, out_fp, rom_name)
     
     print("[+] All done, check '{}'!".format(output_file))
 
