@@ -102,6 +102,15 @@ def main():
     except Exception as e:
         print("[-] Couldn't open '{}' :(".format(output_file))
 
+    date = str_read(in_fp, 4) + "-" + str_read(in_fp, 2) + "-" + str_read(in_fp, 2)
+    in_fp.seek(16)
+    offset = 16 + (in_fp.read().find(b'\x8a\x10') - 16)
+    in_fp.seek(16)
+    model = str_read(in_fp, offset)
+
+    print("[?] Patch build date = {}".format(date))
+    print("[?] Patch model = {}".format(model))
+
     print("[*] Dumping data from {} to '{}'...".format(input_file, output_file))
     write_data(in_fp, out_fp, rom_name, debug)
     

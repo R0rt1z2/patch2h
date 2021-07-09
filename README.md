@@ -18,7 +18,8 @@ patch2h.py input_file output_file
 This is a simple example on a Linux system: 
 ```
 r0rt1z2@r0rt1z2$ python3 patch2h.py mt7662_patch_e3_hdr.bin mt7662_patch_e3_hdr.h
-[*] Writing headers...
+[?] Patch build date = 2013-12-10
+[?] Patch model = ALPS
 [*] Dumping data from mt7662_patch_e3_hdr.bin to 'mt7662_patch_e3_hdr.h'...
 [+] All done, check 'mt7662_patch_e3_hdr.h'!
 r0rt1z2@r0rt1z2$
