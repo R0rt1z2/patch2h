@@ -44,7 +44,7 @@ def write_data(in_file, out_file, rom_name, debug=False):
             data = in_file.read(1)
             hex_data = "0x%s" % data.hex()
         except:
-            print("[!] Found invalid data!")
+            print("[!] Invalid data at pos {} ({})".format(in_file.tell(), data))
             pass
         
         if not data:
