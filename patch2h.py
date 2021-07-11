@@ -29,21 +29,6 @@ import io
 def str_read(file, a):
     return str(file.read(a).decode("utf-8").strip())
 
-def write_headers(rom_name):
-    out_file.seek(0)
-    out_file.write('''/* \n* AUTO GENERATED CODE, DO NOT MODIFY IT \n*/''')
-
-    in_file.seek(0)
-    out_file.write('\n\n#define BUILD_DATE "{}"\n'.format(str_read(in_file, 4) + "-" + str_read(in_file, 2) + "-" + str_read(in_file, 2)))
-
-    in_file.seek(16)
-    offset = 16 + (in_file.read().find(b'\x8a\x10') - 16)
-    in_file.seek(16)
-    out_file.write('#define MODEL "{}"\n\n'.format(str_read(in_file, offset)))
-    
-    in_file.seek(0)
-
-
 def write_data(in_file, out_file, rom_name, debug=False):
     i = 0
     
