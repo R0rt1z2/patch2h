@@ -1,7 +1,7 @@
 # patch2h
 ![GitHub](https://img.shields.io/github/license/R0rt1z2/patch2h)
 
-Convert MediaTek Bluetooth patch files into standard C/C++ headers.
+Convert MediaTek Firmware Patch files into standard C/C++ headers.
 
 ## Requirements
 This binary requires Python 3 or newer installed on your system. 
